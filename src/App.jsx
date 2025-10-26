@@ -3,6 +3,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import ProtectedRoute from './components/ProtectedRoute';
 import PerfectVoidPortalCompact from './components/PerfectVoidPortalCompact';
 import MeditationCalendar from './components/MeditationCalendar';
+import CosmicConsciousnessRecursion from './components/CosmicConsciousnessRecursion';
 import { localAuthService } from './services/localAuthService';
 import './index.css';
 
@@ -41,6 +42,16 @@ function App() {
                   Calendar
                 </button>
                 <button
+                  onClick={() => setCurrentView('cosmic')}
+                  className={`px-4 py-2 rounded-lg transition-colors ${
+                    currentView === 'cosmic' 
+                      ? 'bg-purple-600 text-white' 
+                      : 'bg-purple-600/20 text-purple-200 hover:bg-purple-600/30'
+                  }`}
+                >
+                  Cosmic Breath
+                </button>
+                <button
                   onClick={() => localAuthService.signOut()}
                   className="px-4 py-2 rounded-lg bg-red-600/20 text-red-200 hover:bg-red-600/30 transition-colors"
                 >
@@ -51,9 +62,10 @@ function App() {
           </nav>
 
           {/* Main Content */}
-          <main className="p-4">
+          <main className={currentView === 'cosmic' ? '' : 'p-4'}>
             {currentView === 'meditation' && <PerfectVoidPortalCompact />}
             {currentView === 'calendar' && <MeditationCalendar user={user} />}
+            {currentView === 'cosmic' && <CosmicConsciousnessRecursion />}
           </main>
         </div>
       </ProtectedRoute>
